@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IUser, IContacto, INewMensage } from '../../interfaces/models';
 import { ChatserviceService } from '../../service/chatservice.service';
+import { SwPush } from '@angular/service-worker';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -18,9 +20,10 @@ export class NavbarComponent implements OnInit,OnDestroy,OnChanges {
   @Input() usuario:IUser={tel:"2",uid:""}
   @Input() newmensaje:INewMensage={user:{tel:"",uid:""}}
   @Output() getMensajes:EventEmitter<IContacto>=new EventEmitter()
+  private readonly KEY=environment.KEYPUSH
   contactos:IContacto[]=[]
-  constructor(private chatService:ChatserviceService,private ruta:Router) {
-    
+  constructor(private chatService:ChatserviceService,private ruta:Router,private swPus: SwPush) {
+
    }
   ngOnChanges(changes: SimpleChanges): void {
     if(this.newmensaje.user.tel==="")return
@@ -35,9 +38,9 @@ export class NavbarComponent implements OnInit,OnDestroy,OnChanges {
 
   ngOnInit(): void {
     this.contactoSub=this.chatService.listen('contactos').subscribe(data=>{
-        
+
         this.contactos=data as any
-    
+
     })
   }
 
@@ -84,5 +87,13 @@ export class NavbarComponent implements OnInit,OnDestroy,OnChanges {
   logouth(){
     localStorage.clear()
     this.ruta.navigateByUrl('auth/login')
+  }
+
+  subscriptPush(){
+    this.swPus.requestSubscription({serverPublicKey:this.KEY}).then(
+      resp=>{
+        console.log(resp);
+      }
+    ).catch(err=>console.log)
   }
 }

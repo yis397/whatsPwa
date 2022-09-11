@@ -4,10 +4,11 @@
 /* https://chat-sap.herokuapp.com/api
  */export const environment = {
   production: false,
-  baseUrl:' https://chat-sap.herokuapp.com/api'
+  baseUrl:' https://chat-sap.herokuapp.com/api',
+  KEYPUSH:'BFTPH30jLlop1k4wMj_z9dJn7bJPm9rgPI8MMsdxQWt0e-7HoYH53cYoKGt_7hjKUNOuIp7fBLYnWWS3GR_7ys4'
 
 };
-
+/* {"publicKey":"BFTPH30jLlop1k4wMj_z9dJn7bJPm9rgPI8MMsdxQWt0e-7HoYH53cYoKGt_7hjKUNOuIp7fBLYnWWS3GR_7ys4","privateKey":"IU76yHyfrweVZgtaarOnPmkahTZ7BROItQladv-heMc"} */
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

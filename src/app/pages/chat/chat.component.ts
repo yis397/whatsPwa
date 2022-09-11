@@ -111,4 +111,6 @@ export class ChatComponent implements OnInit,OnDestroy {
     this.isChat=!this.isChat
    }
 
+
+
 }

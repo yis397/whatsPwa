@@ -7,7 +7,6 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-
     "start-pwa": "ng build --base-href=/ && http-server -p 8080 -c-1 dist/whatsap"
   },
   "private": true,
@@ -23,12 +22,13 @@
     "@angular/service-worker": "^14.1.0",
     "@types/pouchdb": "^6.4.0",
     "events": "^3.3.0",
+    "http-server": "14.1.1",
     "ngx-socket-io": "^4.3.0",
     "pouchdb": "^7.3.0",
-    "http-server": "14.1.1",
     "pouchdb-browser": "^7.3.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "web-push": "^3.5.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
