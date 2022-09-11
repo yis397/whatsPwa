@@ -1,12 +1,14 @@
 {
   "name": "whatsap",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+
+    "start-pwa": "ng build --base-href=/ && http-server -p 8080 -c-1 dist/whatsap"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +25,7 @@
     "events": "^3.3.0",
     "ngx-socket-io": "^4.3.0",
     "pouchdb": "^7.3.0",
+    "http-server": "14.1.1",
     "pouchdb-browser": "^7.3.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

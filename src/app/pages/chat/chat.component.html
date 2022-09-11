@@ -42,9 +42,15 @@
 
   <div [ngClass]="item.remitente==user.uid?'card1':'card'">
      <p>{{item.mensaje}}</p>
+     <div [ngClass]="item.remitente==user.uid?'iconshow':'iconhint'">
+       <i *ngIf="!item.isenviado" class="fa-regular fa-clock"></i>
+       <i  *ngIf="item.isenviado" class="fa-solid fa-check-double"></i>
+
+     </div>
 
   </div>
 </div>
+
 
    </div>
 

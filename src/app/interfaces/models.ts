@@ -15,6 +15,7 @@ export interface IMensajes{
   destino:string,
   mensaje:string,
   createdAt?:string,
+  isenviado:boolean,
 }
 export interface INewMensage{
   user:IContacto,

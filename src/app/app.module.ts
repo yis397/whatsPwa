@@ -12,8 +12,8 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-
-const config: SocketIoConfig = {
+/* 'https://chat-sap.herokuapp.com'
+ */const config: SocketIoConfig = {
   url: 'https://chat-sap.herokuapp.com' , options: {}
 };
 

@@ -11,7 +11,11 @@
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
+          "/*.scss",
           "/*.js"
+        ],
+        "urls": [
+          "https://kit.fontawesome.com/a60a10bdf3.js"
         ]
       }
     },

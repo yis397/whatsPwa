@@ -1,8 +1,8 @@
 {
   "name": "whatsap",
-  "short_name": "whatsap",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "short_name": "chatsapp",
+  "theme_color": "#075E54",
+  "background_color": "#075E54",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
@@ -54,6 +54,16 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
-    }
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+  },
+  {
+      "src": "/android-chrome-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+  }
   ]
 }

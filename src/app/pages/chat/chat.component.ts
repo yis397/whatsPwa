@@ -39,19 +39,26 @@ export class ChatComponent implements OnInit,OnDestroy {
       this.subscribeNewMensaje=this.chatService.listen('mensaje').subscribe(data=>{
         if(this.selectConversacion.contacto.tel!==(data as any).user.tel){
           this.newMessenger={...(data as any)}
+          this.listMensajes.map(i=>{
+            if (i.contacto.uid==(data as any).mensage.remitente) {
+              i.mensajes.push((data as any).mensage )
+              return
+            }
+          })
+          return
         }
         this.selectConversacion.mensajes.push((data as any).mensage )
       })
 
     }
-    @HostListener('window:offline')
+ /*    @HostListener('window:offline')
     setNetworkOffline(): void {
-      console.log('nop');
-    }
-  
+
+    } */
+
     @HostListener('window:online')
     setNetworkOnline(): void {
-      console.log('ye');
+
       this.sendAuto()
 
     }
@@ -75,8 +82,11 @@ export class ChatComponent implements OnInit,OnDestroy {
 
       this.chatService.getMensaje(contacto.uid).subscribe(data=>{
         if (data.ok) {
-          this.listMensajes.push({contacto:contacto,mensajes:data.mensajes})
-          this.selectConversacion.mensajes=data.mensajes
+          const mensajes=data.mensajes.map((e:IMensajes)=>{
+            return {...e,isenviado:true}
+          })
+          this.listMensajes.push({contacto:contacto,mensajes:mensajes})
+          this.selectConversacion.mensajes=mensajes
         }
       })
       this.isChat=true
@@ -84,12 +94,12 @@ export class ChatComponent implements OnInit,OnDestroy {
   }
    sendMensage(form2:NgForm){
     const mensaje=form2.value.mensage
-    const data:IMensajes={destino:this.selectConversacion.contacto.uid,remitente:this.user.uid,mensaje}
+    const data:IMensajes={destino:this.selectConversacion.contacto.uid,remitente:this.user.uid,mensaje,isenviado:false}
     if (this.pwaS.setData(data)) {
-      
+
       this.chatService.sendMensaje(data)
     }
-    this.selectConversacion.mensajes.push(data)
+    this.selectConversacion.mensajes.push({...data,isenviado:navigator.onLine})
   }
   async sendAuto(){
     (await this.pwaS.postAll()).map(e=>{
@@ -97,7 +107,7 @@ export class ChatComponent implements OnInit,OnDestroy {
    })
   }
   selectChat(){
-    
+
     this.isChat=!this.isChat
    }
 
