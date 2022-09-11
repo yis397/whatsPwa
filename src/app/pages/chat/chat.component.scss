@@ -1,0 +1,204 @@
+@import "/src/styles.scss";
+
+.body{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(1,2.5fr 5fr);
+    grid-template-rows: repeat(1,1fr);
+    @include tablet{
+      grid-template-columns: repeat(1,1fr);
+      grid-template-rows: repeat(1,1fr);
+    }
+    .nav{
+        background-color: aquamarine;
+    }
+    .chat{
+      @include tablet{
+        position:absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+        background-color: cadetblue;
+
+        .head{
+            padding: 1vmin;
+            display: flex;
+            flex-direction: row;
+            background-color: $color2;
+            button{
+              margin-right: 1rem;
+              font-size: 1.5rem;
+              border: 0;
+              background-color:$color2 ;
+              display: none;
+              color: whitesmoke;
+              @include tablet(){
+                @include flexCent();
+              }
+            }
+            .datos{
+                display: flex;
+                flex-direction: row;
+               width: 80%;
+                img{
+                    @include avatar();
+                }
+                .texto{
+                    margin-left: 1vmin;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    @include datos();
+                    .text1{
+                      color: white
+                    }
+                    .text2{
+                      color: whitesmoke;
+                    }
+                }
+            }
+            .action{
+                @include flexCent();
+                justify-content: space-between;
+                width: 10vw;
+                i{
+                    color: gainsboro;
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        //mensajes
+        .mensajes{
+
+            height: 83vh;
+            overflow-y: auto;
+            padding: 3rem;
+            .card{
+              padding: 1rem;
+              background-color: $color3;
+              border-radius: 10px;
+              max-width: 20vw;
+              margin-bottom: 1rem;
+              position: relative;
+              color: white;
+              @include tablet{
+                max-width: 35vw;
+              }
+                ::after{
+                    content: "";
+                    position: absolute;
+                    bottom: 50%;
+                    right: 85%;
+                    width: 0;
+                    height: 0;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-top: 20px solid $color3;
+                    @include tablet{
+                      right: 85%;
+                      bottom: 60%;
+                    }
+                }
+            }
+            ///
+            .card1{
+               left: 65%;
+                margin-bottom: 1rem;
+                padding: 1rem;
+                background-color: white;
+                border-radius: 10px;
+
+                max-width: 20vw;
+                position: relative;
+                @include tablet{
+                  max-width: 35vw;
+                }
+                ::after{
+                    content: "";
+                    position: absolute;
+                    bottom: 40%;
+                    left: 85%;
+                    width: 0;
+                    height: 0;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-top: 20px solid white;
+                    @include tablet{
+                      left: 85%;
+                      bottom: 40%;
+                    }
+                }
+            }
+        }
+        //input
+        .search{
+            width: 100%;
+            margin-top: 1rem;
+            background-color: $color2;
+            border-radius: 10px;
+            padding: 1vmin;
+            justify-content: space-around;
+            @include flexCent();
+            form{
+                background-color: $color2;
+                border-radius: 1vh;
+                width: 100%;
+                @include flexCent();
+                i{
+                    font-size: 3vmin;
+                    color: gainsboro;
+                    margin-right: 10px;
+                }
+                input{
+                    border-radius: 20vh;
+                    width: 90%;
+                    height: 200%;
+                    padding: 1vmin;
+                }
+               .enviar{
+                @include flexCent();
+                background-color: $color4;
+                color: white;
+                border-radius: 10rem;
+                width: 2rem;
+                height: 2rem;
+                border: 0;
+               }
+            }
+        }
+
+    }
+
+
+    .placeholder{
+      @include tablet(){
+        display: none
+      }
+      @include flexCent();
+      background-color: $color1;
+      .datos{
+        width: 40%;
+        i{
+          font-size: 5rem;
+          color: #34B7F1;
+        }
+        .text1{
+
+          font-weight: bold;
+          color: white;
+        }
+        @include datos();
+        @include flexCent();
+        flex-direction: column;
+        text-align: center;
+        .text2{
+
+          color: white;
+        }
+
+      }
+    }
+}

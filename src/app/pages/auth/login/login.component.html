@@ -1,0 +1,31 @@
+<div class="body">
+<div class="contenido">
+
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" alt="">
+        <p *ngIf="!isError">Login</p>
+        <p class="error" *ngIf="isError">Error en login</p>
+    </div>
+    <form 
+      autocomplete="off"
+      [formGroup]="formLogin"
+      (ngSubmit)="login()">
+
+          <input type="number" name="" id="" placeholder="Telefonico"
+          formControlName="tel">
+          <label class="error" for="" *ngIf="validCampos('tel')">campo requerido/incompleto</label>
+
+       <input type="password" name="" id="" placeholder="password"
+       formControlName="password">
+       <label class="error" for="" *ngIf="validCampos('password')">campo requerido/incompleto</label>
+
+       <button [disabled]="formLogin.invalid || isError" type="submit">Inicia</button>
+    </form>
+    <div class="foot">
+     <a href="auth/register">no tienes una cuenta?</a>
+    </div>
+</div>
+
+
+
+</div>

@@ -1,0 +1,67 @@
+<div class="body">
+   <div className="nav">
+    <app-navbar [usuario]="user" [newmensaje]="newMessenger" (getMensajes)="getMensajes($event)"></app-navbar>
+   </div>
+
+   <div class="placeholder" *ngIf="!isChat">
+    <div class="datos">
+      <i class="fa-solid fa-signal"></i>
+      <p class="text1">CHATSAAP  WEB</p>
+      <P class="text2">SELECCIONE  UN  CHAT</P>
+
+    </div>
+   </div>
+
+
+   <div class="chat" *ngIf="isChat">
+     <div class="head">
+      <button (click)="selectChat()">
+        <i class="fa-solid fa-arrow-left-long"></i>
+      </button>
+      <div class="datos">
+         <img src="https://ca-times.brightspotcdn.com/dims4/default/87be6da/2147483647/strip/true/crop/1970x1108+39+0/resize/1200x675!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F12%2Fa5%2F79e097ccf62312d18a025f22ce48%2Fhoyla-recuento-11-cosas-aman-gatos-top-001" alt="">
+         <div class="texto">
+          <p class="text1">{{selectConversacion.contacto.username??selectConversacion.contacto.tel}}</p>
+          <p class="text2"
+          *ngIf="selectConversacion.contacto.online">En linea</p>
+          <p class="text2"
+          *ngIf="!selectConversacion.contacto.online">...</p>
+         </div>
+
+      </div>
+
+      <div class="action">
+         <i class="fa-solid fa-magnifying-glass"></i>
+         <i class="fa-solid fa-ellipsis-vertical"></i>
+      </div>
+   </div>
+
+
+   <div class="mensajes" >
+<div *ngFor="let item of selectConversacion.mensajes">
+
+  <div [ngClass]="item.remitente==user.uid?'card1':'card'">
+     <p>{{item.mensaje}}</p>
+
+  </div>
+</div>
+
+   </div>
+
+   <div class="search">
+      <form (ngSubmit)="sendMensage(form2)" #form2="ngForm" novalidate>
+         <i class="fa-solid fa-face-smile"></i>
+         <i class="fa-solid fa-magnifying-glass"></i>
+         <input type="text" ngModel name="mensage" placeholder="mensage">
+          <button type="submit" class="enviar">
+            <i class=" fa-solid fa-paper-plane"></i>
+
+          </button>
+
+      </form>
+   </div>
+
+
+
+   </div>
+</div>

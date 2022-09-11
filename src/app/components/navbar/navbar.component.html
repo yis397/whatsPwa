@@ -1,0 +1,86 @@
+<div class="body">
+
+  <div class="add" *ngIf="ismodal">
+    <div class="body">
+
+      <div class="datos">
+
+        <h2>Agrega un contacto</h2>
+        <button (click)="openModal()">X</button>
+      </div>
+
+      <form  (ngSubmit)="addContacto(form1)" #form1="ngForm" novalidate>
+      <div class="search">
+          <label for="">
+            <input type="number" ngModel name="newcontacto"  placeholder="Telefono">
+         </label>
+        </div>
+        <button type="submit">Add</button>
+       </form>
+       <span *ngIf="isErrorContacto && msgContacto.length!=0">{{msgContacto}}</span>
+    </div>
+  </div>
+
+
+  <head >
+     <img src="https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posición-de-foto-gris-vector-de-ilu.jpg?ver=6" alt="">
+
+     <div class="action">
+        <button class="agregar" (click)="openModal()">
+         <i class="fa-solid fa-user-plus"></i>
+        </button>
+        <button>
+
+          <i class="fa-solid fa-gear"></i>
+       </button>
+       <button (click)="logouth()">
+         <i class="fa-solid fa-arrow-right-to-bracket"></i>
+       </button>
+     </div>
+  </head>
+
+
+  <div class="mensaje">
+     <div class="bell">
+        <i class="fa-solid fa-bell-slash"></i>
+     </div>
+
+     <div>
+       <p class="text1">Recibe notificaciones de mensajes nuevos</p>
+       <p class="text2">Activar notificaciones de escritorio></p>
+     </div>
+  </div>
+
+
+  <div class="search">
+     <label for="">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="search">
+     </label>
+  </div>
+
+  <div class="contactos" >
+
+    <div class="card" *ngFor="let item of contactos">
+       <button (click)="selectChat(item)">
+        <img src="https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posición-de-foto-gris-vector-de-ilu.jpg?ver=6" alt="">
+        <div class="datos">
+           <div class="fecha">
+              <p class="text1">{{item.username??item.tel}}</p>
+               <p class="text2">14:25</p>
+
+           </div>
+            <div class="estado">
+               <p class="text2">mensajes</p>
+               <div *ngIf="item.newMensaje??false"></div>
+
+            </div>
+        </div>
+      </button>
+     </div>
+
+  </div>
+
+
+
+</div>

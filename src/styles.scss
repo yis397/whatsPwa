@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+$color1:#128C7E;
+$color2:#075E54;
+$color3:#25D366;
+$color4:#34B7F1;
+@mixin flexCent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin avatar{
+  @include compu(){
+    height: 5vh;
+    width: 5vh;
+  }
+    height: 8vh;
+    width: 8vh;
+    border-radius: 30vh;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    object-position: center center;
+    @include tablet{
+      height: 7vh;
+      width: 7vh;
+    }
+}
+@mixin datos{
+    .text1{
+        width: 80%;
+        font-size: 3vmin;
+      }
+      .text2{
+         font-size: 2vmin;
+         color: dimgray;
+
+      }
+}
+@mixin tablet {
+  @media screen  and (max-width: 700px) {
+      @content;
+  }
+}
+@mixin compu {
+  @media screen  and (max-width: 1505px) {
+      @content;
+  }
+}

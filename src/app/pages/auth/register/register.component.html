@@ -1,0 +1,30 @@
+<div class="body">
+    <div class="contenido">
+
+        <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" alt="">
+            <p *ngIf="!isError">Registrate</p>
+            <p class="error" *ngIf="isError">{{msg}}</p>
+        </div>
+        <form [formGroup]="formRegister"
+        autocomplete="off"
+        (ngSubmit)="registerUser()">
+           <input type="number" formControlName="tel" name="" id="" placeholder="Num Telefonico">
+           <label class="error" *ngIf="validCampos('tel')" for="">requerido</label>
+           <input type="text" formControlName="username" name="" id="" placeholder="username">
+           <label class="error"  *ngIf="validCampos('username')" for="">requerido</label>
+           <input type="password"  formControlName="password" name="" id="" placeholder="password">
+           <label class="error"  *ngIf="validCampos('password')" for="">requerido</label>
+           <input type="password" formControlName="password2" name="" id="" placeholder="Verifica password">
+           <label class="error"  *ngIf="validCampos('password2')" for="">requerido</label>
+           
+           <button type="submit" [disabled]="formRegister.invalid || isError">Inicia</button>
+        </form>
+        <div class="foot">
+         <a href="auth/login">tienes una cuenta</a>
+        </div>
+    </div>
+
+
+
+    </div>
