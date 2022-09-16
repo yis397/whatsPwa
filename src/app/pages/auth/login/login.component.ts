@@ -15,16 +15,19 @@ export class LoginComponent   {
     tel:['',[Validators.required,Validators.minLength(6)]],
     password:['',[Validators.required,Validators.minLength(6)]],
   })
-  constructor(private fb:FormBuilder,private authSer:AuthService,private ruta:Router) { }
+  constructor(private fb:FormBuilder,private authSer:AuthService,private ruta:Router) {
+    
+   }
 
 
    validCampos(name:string){
    return this.formLogin.controls[name].errors
    && this.formLogin.controls[name].touched
   }
+
    login(){
     const {tel,password}=this.formLogin.value
-    this.authSer.login({tel,password})
+    this.authSer.login({tel,password,push:localStorage.getItem('x-push')??'nel'})
     .subscribe(data=>{
       if (data.ok) {
         this.formLogin.reset()

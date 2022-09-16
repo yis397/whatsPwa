@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { of } from 'rxjs';
 import { IUser } from '../interfaces/models';
+import { SwPush } from '@angular/service-worker';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,27 @@ import { IUser } from '../interfaces/models';
 export class AuthService {
   private baseurl=environment.baseUrl
   private user:IUser={tel:"",uid:""};
+  private readonly KEY=environment.KEYPUSH
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private swPus: SwPush) {
+    this.subscriptPush()
    }
   setUser(user:IUser){
    
     this.user=user
   }
+  subscriptPush(){
+    this.swPus.requestSubscription({serverPublicKey:this.KEY}).then(
+      resp=>{
+        const token=JSON.parse(JSON.stringify(resp))
+        localStorage.setItem('x-push',token)
+      }
+    ).catch(err=>console.log)
+  }
   getUser(){
     return this.user
   }
-  registro(data:{username:string,password:string,tel:string}){
+  registro(data:{username:string,password:string,tel:string,push:string}){
     const urll=`${this.baseurl}/auth/register`
     return this.http.post(urll,data)
     .pipe(
@@ -37,7 +48,7 @@ export class AuthService {
       ))
   }
 
-  login(data:{password:string,tel:string}){
+  login(data:{password:string,tel:string,push:string}){
     const url=`${this.baseurl}/auth/login`
     return this.http.post(url,data)
     .pipe(

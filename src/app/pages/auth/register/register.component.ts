@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
    }
   registerUser(){
     const {username,tel,password}=this.formRegister.value
-    this.authServ.registro({username,tel,password})
+    this.authServ.registro({username,tel,password,push:localStorage.getItem('x-push')??'nel'})
     .subscribe(data=>{
       if (data.ok) {
         setTimeout(() => {

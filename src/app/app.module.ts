@@ -14,7 +14,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 /* 'https://chat-sap.herokuapp.com'
  */const config: SocketIoConfig = {
-  url: 'https://chat-sap.herokuapp.com' , options: {}
+  url: 'http://localhost:8080' , options: {}
 };
 
 

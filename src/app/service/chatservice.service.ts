@@ -46,6 +46,17 @@ export class ChatserviceService {
   selectChat(uid:string){
     this.ischatSelect=!this.ischatSelect
   }
+  getContacts(){
+    const url=this.baseurl+'/auth/contacts'
+    return this.htpp.get(url,{headers:this.headers})
+    .pipe(
+      tap(({ok,lista}:any)=>{
+
+      }),map(resp=>resp),
+      catchError(err=>of(err.error))
+    )
+
+  }
    getMensaje(contacto:string){
     const url=this.baseurl+'/mensajes/getMensaje/'+contacto
     return  this.htpp.get(url,{headers:this.headers})

@@ -20,10 +20,9 @@ export class NavbarComponent implements OnInit,OnDestroy,OnChanges {
   @Input() usuario:IUser={tel:"2",uid:""}
   @Input() newmensaje:INewMensage={user:{tel:"",uid:""}}
   @Output() getMensajes:EventEmitter<IContacto>=new EventEmitter()
-  private readonly KEY=environment.KEYPUSH
   contactos:IContacto[]=[]
-  constructor(private chatService:ChatserviceService,private ruta:Router,private swPus: SwPush) {
-
+  constructor(private chatService:ChatserviceService,private ruta:Router) {
+    this.getAmigos()
    }
   ngOnChanges(changes: SimpleChanges): void {
     if(this.newmensaje.user.tel==="")return
@@ -32,16 +31,18 @@ export class NavbarComponent implements OnInit,OnDestroy,OnChanges {
       this.contactos.unshift({...this.newmensaje.user,newMensaje:true})
       return
     }
+
     this.contactos=this.contactos.filter(e=>e.tel!==this.newmensaje.user.tel)
     this.contactos.unshift({...this.newmensaje.user,newMensaje:true})
   }
 
   ngOnInit(): void {
-    this.contactoSub=this.chatService.listen('contactos').subscribe(data=>{
-
-        this.contactos=data as any
-
+    this.chatService.getContacts().subscribe(e=>{
+      if (e.ok) {
+        this.contactos=e.lista
+      }
     })
+
   }
 
   ngOnDestroy(): void {
@@ -49,6 +50,19 @@ export class NavbarComponent implements OnInit,OnDestroy,OnChanges {
   }
   openModal(){
     this.ismodal=!this.ismodal
+  }
+  getAmigos(){
+    this.contactoSub=this.chatService.listen('contactos').subscribe(data=>{
+      this.contactos.map(e=>{
+        for (let i = 0; i < (data as any).length; i++) {
+            if (e.uid===(data as any)[i].uid) {
+              e.online=(data as any)[i].online
+            }
+          
+        }
+      })
+
+  })
   }
   addContacto(form1:NgForm){
     const tel=form1.value.newcontacto.toString()
@@ -89,11 +103,4 @@ export class NavbarComponent implements OnInit,OnDestroy,OnChanges {
     this.ruta.navigateByUrl('auth/login')
   }
 
-  subscriptPush(){
-    this.swPus.requestSubscription({serverPublicKey:this.KEY}).then(
-      resp=>{
-        console.log(resp);
-      }
-    ).catch(err=>console.log)
-  }
 }

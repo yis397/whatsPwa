@@ -5,6 +5,12 @@
     width: 100vw;
     height: 100vh;
     @include flexCent();
+    .trans{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.445);
+    }
     .contenido{
         background-color: white;
         border-radius: 2rem;

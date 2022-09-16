@@ -4,7 +4,7 @@
 /* https://chat-sap.herokuapp.com/api
  */export const environment = {
   production: false,
-  baseUrl:' https://chat-sap.herokuapp.com/api',
+  baseUrl:' http://localhost:8080/api',
   KEYPUSH:'BFTPH30jLlop1k4wMj_z9dJn7bJPm9rgPI8MMsdxQWt0e-7HoYH53cYoKGt_7hjKUNOuIp7fBLYnWWS3GR_7ys4'
 
 };
